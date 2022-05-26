@@ -1,0 +1,28 @@
+#로컬 레포지토리 생성
+git init 
+
+#스테이징(버전 관리할 파일 지정)
+git add . 
+
+#레포지토리 상태 보기
+git status 
+
+#커밋 이력
+git log 
+
+#커밋 명령
+git commit -m "fileName"
+
+#로컬 레포지토리와 리모트 연결
+git remote add origin https://github.com/jooooooing/web.git
+
+# 리모트 연결 확인
+git remote -v
+
+# 리모트 origin에 로컬 main 를 푸시 하겠다
+git push -u origin main
+
+
+
+
+
