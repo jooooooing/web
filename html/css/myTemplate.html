@@ -12,17 +12,22 @@
 	body {
 		margin: 0;
 		padding: 0;
+		font-family:Arial, Helvetica, sans-serif
 	}
 
 	.main {
 		color: white;
 		font-size: 40px;
 		display: flex;
-		align-items: center; /* 수직 정렬 */
-		flex-direction: column; /* default: row */
-		justify-content: center; /* flex direction에 대해서 정렬방식 선택 */
+		align-items: center;
+		/* 수직 정렬 */
+		flex-direction: column;
+		/* default: row */
+		justify-content: center;
+		/* flex direction에 대해서 정렬방식 선택 */
 		flex-wrap: nowrap;
-		}
+		width: 100%;
+	}
 
 	.back_img {
 		width: 100%;
@@ -54,18 +59,23 @@
 		float: right;
 		padding-right: 20px;
 	}
-	
+
 	.content {
 		display: flex;
-		align-items: center; /* 수직 정렬 */
-		flex-direction: column; /* default: row */
-		justify-content: center; /* flex direction에 대해서 정렬방식 선택 */
+		align-items: center;
+		/* 수직 정렬 */
+		flex-direction: column;
+		/* default: row */
+		justify-content: center;
+		/* flex direction에 대해서 정렬방식 선택 */
 		flex-wrap: nowrap;
+	
 	}
 
 	#name {
 		color: rgb(241, 51, 18);
 	}
+
 	span {
 		padding-right: 15px;
 	}
@@ -76,6 +86,9 @@
 		padding: 30px;
 	}
 
+	a {
+		color: white;
+	}
 </style>
 
 <body>
@@ -102,9 +115,11 @@
 				</div>
 				<br><br>
 				<div class="btn_link">
-					<div class = "btn_text">
+					<div class="btn_text">
 						View my work
-						<i class="fa-solid fa-circle-arrow-right"></i>
+						<span>
+							<a href="https://github.com/jooooooing"><i class="fa-solid fa-circle-arrow-right"></i></a>
+						</span>
 					</div>
 				</div>
 			</div>
