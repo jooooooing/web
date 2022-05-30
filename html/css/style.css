@@ -5,14 +5,14 @@ div {
 
 body {
 	background-color: black;
-	font-family: 'Noto Sans KR', sans-serif;
+	font-family: 'Noto Sans KR', sans-serif; /*글씨체 지정, 순서대로 적용 */
 }
 
 p {
 	color: blue;
 }
 
-/* class 셀렉터 */
+/* class 셀렉터 .class */
 .red-text {
 	color: red;
 }
@@ -31,7 +31,7 @@ p {
 	border-color: yellow;
 }
 
-/* 아이디 셀렉터 */
+/* 아이디 셀렉터  #*/
 #div1 {
 	background-color: tomato;
 }
@@ -41,7 +41,8 @@ a {
 	color: grey;
 }
 
-a:hover {
+/* 링크에 마우스 올렸을 때 적용 */
+a:hover { 
 	color: white;
 	text-transform: uppercase;
 }
