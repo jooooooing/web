@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.container {
+			width: 100vh;
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			margin: auto;
+			font-size: 50px;
+			flex-wrap: nowrap;
+		}
+
+		button {
+			font-size: 50px;			
+		}
+	</style>
+
+	<script>
+		let inputText = (prompt('입력'));
+		if (!inputText) {
+			alert('텍스트 값을 입력해주세요');
+		} else {
+			document.write("<div class ='container'><div id='inputText'>" + inputText + "</div>");
+			document.write(`<div class = 'color_btn'><div><button onclick='click_red()'>red</button>
+			<button onclick='click_blue()'>blue</button>
+			<button onclick='click_green()'>green</button></div></div></div>`);
+
+			function click_red() {
+				let $red = document.getElementById('inputText');
+				$red.style.color = 'red';
+				alert('red색으로 변경 됩니다.');
+			}
+
+			function click_blue() {
+				let $blue = document.getElementById('inputText');
+				$blue.style.color = 'blue';
+				alert('blue색으로 변경 됩니다.');
+			}
+			function click_green() {
+				let $green = document.getElementById('inputText');
+				$green.style.color = 'green';
+				alert('green색으로 변경 됩니다.');
+			}
+		}
+	</script>
+</body>
+
+</html>
