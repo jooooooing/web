@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<style>
+		.box {
+			display: inline-block;
+			border: 1px black solid;
+			font-size: 30px;
+			padding: 8px;
+			margin: 5px;
+			background-color: grey;
+			color: white;
+		}
+	</style>
+	<div class="main">
+		<div>
+			<div id = "html" class="box" onclick="onMouseOver()">html</div>
+			<div id = "css" class="box" onclick="onMouseOver2()">css</div>
+			<div id = "js" class="box" onclick="onMouseOver3()">javascript</div>
+		</div>
+	</div>
+
+
+	<script>
+		function onMouseOver() {
+			let $html = document.getElementById('html'); //ID로 접근
+			$html.style.color = 'black';
+			$html.style.backgroundColor = 'white';
+			let $css = document.getElementById('css'); //ID로 접근
+			$css.style.color = 'white';
+			$css.style.backgroundColor = 'grey';
+			let $js = document.getElementById('js'); //ID로 접근
+			$js.style.color = 'white';
+			$js.style.backgroundColor = 'grey';
+
+		}
+
+		function onMouseOver2() {
+			let $css = document.getElementById('css'); //ID로 접근
+			$css.style.color = 'black';
+			$css.style.backgroundColor = 'white';
+			let $html = document.getElementById('html'); //ID로 접근
+			$html.style.color = 'white';
+			$html.style.backgroundColor = 'grey';
+			let $js = document.getElementById('js'); //ID로 접근
+			$js.style.color = 'white';
+			$js.style.backgroundColor = 'grey';
+		}
+
+		function onMouseOver3() {
+			let $js = document.getElementById('js'); //ID로 접근
+			$js.style.color = 'black';
+			$js.style.backgroundColor = 'white';
+			let $html = document.getElementById('html'); //ID로 접근
+			$html.style.color = 'white';
+			$html.style.backgroundColor = 'grey';
+			let $css = document.getElementById('css'); //ID로 접근
+			$css.style.color = 'white';
+			$css.style.backgroundColor = 'grey';
+		}
+
+	</script>
+</body>
+
+</html>
