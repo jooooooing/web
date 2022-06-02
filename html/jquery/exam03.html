@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+</head>
+
+<style>
+	.container {
+		width: 280px;
+	}
+
+	#header {
+		background-color: #455C9F;
+		color: white;
+		padding: 10px;
+	}
+
+	
+	.content {
+		background-color: #E6E7EA;
+		padding: 10px;
+	}
+
+	.item {
+		background-color: white;
+		margin: 10px;
+	}
+</style>
+<body>
+	<div class="container">
+		<div id="header">
+			이주현님, 안녕하세요?
+		</div>
+		<div class="content">
+			페이스북 색감따라하기
+			<div class="item">
+				<b>박지성</b> SBS에서 월드컵 보세요
+			</div>
+			<div class="item">
+				<b>안정환</b> MBC죠...
+			</div>
+			<div class="item">
+				<b>이영표</b> KBS는 수신료의 가치를...
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<input id = "add_button" type="submit" value="등록하기">
+	</div>
+
+<script>
+		$('#add_button').click(function () {
+			let text = prompt('기사 내용');
+			$('.content').append(`<div class="item">${text}</div>`);
+		});
+
+	</script>
+
+</body>
+</html>

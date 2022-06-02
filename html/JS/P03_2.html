@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<style>
+		div {
+			display: inline-block;
+			border: 1px black solid;
+			font-size: 30px;
+			padding: 8px;
+			margin: 5px;
+		}
+
+		.box {
+			background-color: grey;
+			color: white;
+		}
+
+		.selected_box {
+			background-color: white;
+			color: black;
+		}
+	</style>
+
+	<div id="html" class="box" onclick="onMouseOver(this)">html</div>
+	<div id="css" class="box" onclick="onMouseOver(this)">css</div>
+	<div id="js" class="box" onclick="onMouseOver(this)">javascript</div>
+
+
+	<script>
+		function onMouseOver($el) {
+			console.log($el);
+			$el.className = 'selected_box';
+
+			$divs = document.querySelectorAll('div');
+
+			for (let i = 0; i < $divs.length; i++) {
+				if ($divs[i] === $el) {
+					$divs[i].className = 'selectd_box';
+				} else {
+					$divs[i].className = 'box';
+				}
+			}
+		}
+
+
+	</script>
+</body>
+
+</html>
