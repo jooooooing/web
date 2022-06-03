@@ -8,6 +8,14 @@
 	width: 200px;
 	height: 200px;
 	position: absolute;
-	bottom: 0;
+	bottom: 50px;
 	left: 20px;
+}
+
+#goomba {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	bottom: 0px;
+	right: 50px;
 }
