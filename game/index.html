@@ -15,6 +15,7 @@
 
 <body>
 	<div class="container">
+		<div class="background"> </div>
 		<img id="mario" src="assets/mario.gif" alt="mario">
 		<img id="goomba" src="assets/goomba.gif" alt="goomba">
 		<img id="killer" src="assets/killer.jpg" alt="killer">
@@ -47,7 +48,7 @@
 				$('#goomba').stop().hide();
 				goombaInit();
 				setTimeout(goombaStart, getRandomInt(500, 1000));
-				
+
 			}
 
 
@@ -91,7 +92,7 @@
 			//발사
 			isKillerStart = true;
 			//미사일 발사
-			$('#killer').show().animate({ left: '105%'}, 1000, function(){
+			$('#killer').show().animate({ left: '105%' }, 1000, function () {
 				//원래 자리로 이동
 				$('#killer').css('left', '200px').hide();
 				isKillerStart = false;
@@ -103,10 +104,10 @@
 			let respawnTime = getRandomInt(1000, 2000);
 			$('#goomba').animate({ left: '-200px' }, speed, function () {
 
-				if(isGameOver == false){
+				if (isGameOver == false) {
 					score += 100;
 					setScore(score);
-				}	
+				}
 
 				//왼쪽 끝까지 가면 초기 위치로 이동
 				$('#goomba').css('right', '-200px').css('left', '');
@@ -118,13 +119,13 @@
 			});
 		}
 
-		function setScore(score){
+		function setScore(score) {
 			$('#score').text(`점수 :${score}`);
 		}
 
 		function goombaInit() {
-				//굼바 초기 위치로 이동
-				$('#goomba').css('right', '-200px').css('left', '').show();
+			//굼바 초기 위치로 이동
+			$('#goomba').css('right', '-200px').css('left', '').show();
 
 		}
 
