@@ -16,7 +16,8 @@
 <body>
 	<div class="container">
 		<img id="mario" src="assets/mario.gif" alt="mario">
-		<img id="goomba" src="assets/goomba.png" alt="goomba">
+		<img id="goomba" src="assets/goomba.gif" alt="goomba">
+		<img id="killer" src="assets/killer.jpg" alt="killer">
 		<div id="score">점수 : 0</div>
 	</div>
 
@@ -27,6 +28,31 @@
 		let isJumping = false;
 		let isGameOver = false;
 		let score = 0;
+		let isKillerStart = false;
+
+		function goombaDown() {
+			let goombaLeft = Number($('#goomba').css('left').replace('px', ''));
+			let killerRight = Number($('#killer').css('left').replace('px', '')) + 100;
+
+			if (isKillerStart && goombaLeft <= killerRight) {
+				score += 200;
+				setScore(score);
+				$('#killer').stop().hide();
+				//킬러 없애고
+
+				killerInit();
+				isKillerStart = false;
+
+				//굼바 없애고
+				$('#goomba').stop().hide();
+				goombaInit();
+				setTimeout(goombaStart, getRandomInt(500, 1000));
+				
+			}
+
+
+
+		}
 
 		function marioDown() {
 			if (isGameOver) {
@@ -53,6 +79,25 @@
 			return Math.floor(Math.random() * (max - min)) + min; //최대값은 제외, 최솟값은 포함
 		}
 
+		function killerInit() {
+			$('#killer').css('left', '220px').stop().hide();
+		}
+
+		function killerStart() {
+			if (isKillerStart) {
+				retrun;
+			}
+
+			//발사
+			isKillerStart = true;
+			//미사일 발사
+			$('#killer').show().animate({ left: '105%'}, 1000, function(){
+				//원래 자리로 이동
+				$('#killer').css('left', '200px').hide();
+				isKillerStart = false;
+			});
+		}
+
 		function goombaStart() {
 			let speed = getRandomInt(1000, 2000);
 			let respawnTime = getRandomInt(1000, 2000);
@@ -60,15 +105,27 @@
 
 				if(isGameOver == false){
 					score += 100;
-					$('#score').text(`점수 :${score}`);
+					setScore(score);
 				}	
 
 				//왼쪽 끝까지 가면 초기 위치로 이동
 				$('#goomba').css('right', '-200px').css('left', '');
 
+				goombaInit();
+
 				//1초 후에 다시 출발
 				setTimeout(goombaStart, respawnTime);
 			});
+		}
+
+		function setScore(score){
+			$('#score').text(`점수 :${score}`);
+		}
+
+		function goombaInit() {
+				//굼바 초기 위치로 이동
+				$('#goomba').css('right', '-200px').css('left', '').show();
+
 		}
 
 
@@ -91,6 +148,10 @@
 					case ' ':
 						jump();
 						break;
+
+					case 'b':
+						killerStart();
+						break;
 				}
 			});
 		});
@@ -99,7 +160,10 @@
 		goombaStart();
 
 		//충돌 체크
-		setInterval(marioDown, 10)
+		setInterval(marioDown, 10);
+
+		//굼바 죽었나 체크
+		setInterval(goombaDown, 10);
 
 
 	</script>

@@ -13,9 +13,20 @@
 }
 
 #goomba {
-	width: 200px;
-	height: 200px;
+	width: 120px;
+	height: 120px;
 	position: absolute;
-	bottom: 0px;
+	bottom: 50px;
 	right: 50px;
+}
+
+#killer {
+	transform: scaleX(-1); /*좌우반전*/
+	width: 100px;
+	position: absolute;
+	left: 200px;
+	bottom: 70px;
+	display: none;
+
+	
 }
