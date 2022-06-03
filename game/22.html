@@ -1,0 +1,338 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@jooooooing 
+BradKim59
+/
+vscodepractice
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+vscodepractice/jquery/back_ground.html
+@BradKim59
+BradKim59 game simulation practice
+Latest commit e8f57c0 18 days ago
+ History
+ 1 contributor
+297 lines (258 sloc)  7.52 KB
+   
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <style>
+        #container {
+            position: absolute;
+            width: 100%;
+            height: 600px;
+            top: 50px;
+            border: 1px black solid;
+        }
+
+        html,
+        body {
+            margin: 0;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        #pika {
+            position: absolute;
+            width: 140px;
+            height: 100px;
+            bottom: 50px;
+            left: 40%;
+        }
+
+        #mariodead {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            bottom: 40px;
+            left: 30px;
+        }
+
+        #killer {
+            position: absolute;
+            width: 50px;
+            bottom: 50px;
+            right: -120px;
+        }
+
+        #wepon {
+            position: absolute;
+            height: 15px;
+            width: 60px;
+            bottom: 80px;
+            left: 85px;
+        }
+
+        #background {
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            background: url("../jquery/essets/bgbg.png");
+            background-size: contain;
+            animation-name: bg-slide;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        #score {
+            position: absolute;
+            color: white;
+            font-size: 2rem;
+            left: 20px;
+            top: 20px;
+        }
+
+        #startgame {
+            position: absolute;
+            width: 300px;
+            top: 20px;
+        }
+
+        #gameOverImage {
+            position: absolute;
+            width: 300px;
+            top: 70px;
+            left: 40%;
+        }
+
+        .game_start_button {
+            position: absolute;
+            width: 300px;
+            top: 30%;
+            padding: 20px;
+            background-color: royalblue;
+            color: bisque;
+            font-size: 50px;
+            left: 40%;
+        }
+
+        .startAgainButton {
+            position: absolute;
+            width: 300px;
+            top: 30%;
+            padding: 20px;
+            background-color: royalblue;
+            color: bisque;
+            font-size: 50px;
+            left: 40%;
+        }
+
+        #startGameImage {
+            position: absolute;
+            width: 300px;
+            top: 70px;
+            left: 40%;
+        }
+
+        @keyframes bg-slide {
+            from {
+                left: 0px;
+            }
+
+            to {
+                left: -100%;
+            }
+        }
+    </style>
+
+    <div id="container">
+        <div id="background"></div>
+        <img id="wepon" src="../jquery/essets/전기1.gif" alt="killer" />
+        <img id="pika" src="../jquery/essets/피카츄.gif" alt="pika" />
+        <img id="mariodead" src="../jquery/essets/dead2.gif" alt="" />
+        <img id="killer" src="../jquery/essets/gb.gif" alt="killer" />
+        <div id="score">SCORE : 0</div>
+    </div>
+    <div id="gameover">
+        <img src="../jquery/essets/gameover3.png" alt="게임오버 이미지" id="gameOverImage">
+        <button class="startAgainButton">RESTART</button>
+    </div>
+    <div id="start">
+        <img id="startGameImage" src="../jquery/essets/startimage.png" alt="스타트이미지" />
+        <button class="game_start_button">START</button>
+    </div>
+
+    <script>
+        const WIDTH = 1200;
+        const HEIGHT = 600;
+
+        let pika = $("#pika");
+        let killer = $("#killer");
+        let wepon = $("#wepon");
+
+        // 상태
+        let isJumping = false;
+        let isGameOver = false;
+        let isshooting = false;
+        let score = 0;
+
+        function jump() {
+            if (isJumping || isGameOver) {
+                return;
+            }
+
+            isJumping = true;
+            pika
+                .animate({ bottom: "+=100px" }, 500)
+                .animate({ bottom: "-=100px" }, 500, function () {
+                    isJumping = false;
+                });
+        }
+
+        function moveWepon() {
+            $("#wepon").show();
+            if (isshooting) {
+                return;
+            }
+            isshooting = true;
+            wepon.animate({ left: "110%" }, 3000, function () {
+                wepon.css({ left: "90px" });
+                isshooting = false;
+                $("#wepon").hide();
+                console.log("체크");
+            });
+        }
+        function moveKiller() {
+            killer.animate({ right: "120%" }, 3000, function () {
+                killer.css({ right: "-100px" });
+
+                if (isGameOver == false) {
+                    setTimeout(moveKiller, 1000);
+                    score += 100;
+                    $("#score").text(`SCORE : ${score}`);
+                }
+            });
+        }
+
+        function marioDead() {
+            let killerLeft = parseInt(killer.css("left").replace("px", ""));
+            let pikaLeft = parseInt(pika.css("left").replace("px", ""));
+            let pikaRight = pikaLeft + 140;
+
+            if (
+                isJumping == false &&
+                pikaRight > killerLeft &&
+                killerLeft > pikaLeft
+            ) {
+                isGameOver = true;
+            }
+        }
+
+        function gameOver() {
+            isGameOver = true;
+            killer.stop();
+
+            // 게임오버 화면 보여주고
+            $("#gameover").show();
+            $("#start").hide();
+            $("#container").hide;
+            $("#pika").hide();
+            $("#mariodead").show();
+        }
+
+        function gameStart() {
+            $("#gameover").hide();
+            $("#pika").show();
+            $("#container").show;
+            $("#mariodead").hide();
+            $("#wepon").hide();
+            isGameOver = false;
+
+            killer.css({ right: "-100px" });
+        }
+
+        $("body").keydown(function (event) {
+            // 마리오 현재 좌표 정보
+            let left = parseInt(pika.css("left").replace("px", ""));
+            let top = parseInt(pika.css("top").replace("px", ""));
+            let right = left + 140;
+            let bottom = top + 100;
+            let move = 25; // 이동할 픽셀
+
+            switch (event.key) {
+                case " ":
+                    jump();
+                    break;
+                case "Enter":
+                    moveWepon();
+                    break;
+            }
+        });
+
+        $(".game_start_button").click(function () {
+            $("#start").hide();
+            gameStart();
+            $("#pika").animate({
+                left: "-=38%"
+            });
+        });
+
+        $(".startAgainButton").click(function () {
+            $("#start").hide();
+            gameStart();
+            game();
+        });
+
+        function game() {
+            setTimeout(moveKiller, 1000);
+
+            // 게임 화면 그리기 30frame
+            setInterval(function () {
+                if (isGameOver) {
+                    gameOver();
+                } else {
+                    //  사망 체크
+                    marioDead();
+                }
+            }, 1000 / 30);
+        }
+
+        $(function () {
+            $("#start").show();
+            gameStart();
+            $(".game_start_button").click(function () {
+                game();
+            });
+        });
+    </script>
+</body>
+
+</html>
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete
