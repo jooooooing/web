@@ -2,187 +2,190 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-		crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="css/style.css">
-	<!--css style시트 연결-->
-	<style>
-		@import url('http://fonts.cdnfonts.com/css/new-super-mario-font-u');
-	</style>
-
-
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/style.css" />
+  <!--css style시트 연결-->
+  <style>
+    @import url("http://fonts.cdnfonts.com/css/new-super-mario-font-u");
+  </style>
 </head>
 
 <body>
-	<div class="container">
-		<div class="background"></div>
-		<div id="score">Score : 0</div>
-		<img id="mario" src="assets/marioSwim.gif" alt="mario">
-		<img id="fish" src="assets/fish.webp" alt="fish">
-		<img id="killer" src="assets/killer.png" alt="killer">
-		<img id="down" src="assets/down.png" alt="killer">
-	</div>
-	<div id="start">
-		<img src="assets/title.png" alt="title" />
-		<button id="game_start_button">START</button>
-	</div>
-	<div id="gameover">
-		<img src="assets/youdied.gif" alt="게임오버 이미지" id="gameover">
-		<button id="restart">RESTART</button>
-	</div>
+  <div class="container">
+    <div class="background"></div>
+    <div id="score" class="text">Score : 0</div>
+    <div id="credit" class="text"> DEVELOPED BY JOOHYUN LEE</div>
+    <img id="mario" src="assets/marioSwim.gif" alt="mario" />
+    <img id="fish" src="assets/fish.webp" alt="fish" />
+    <img id="killer" src="assets/killer.png" alt="killer" />
+    <img id="mario_die" src="assets/down.png" alt="mario_die" />
+    <div id="start" class="title">
+      <img src="assets/title.png" alt="start" />
+      <div id="game_start_button" class="button" onclick="gameStart()">START</div>
+      <div id="tutorial" class="msg">
+        <div>JUMP : SPACEBAR&nbsp;&nbsp;SHOT : F</div>
+        <div>PRESS START</div>
+      </div>
+    </div>
+    <div id="gameover" class="title">
+      <img id="gameover_img" src="assets/youdied.gif" alt="게임오버 이미지" />
+      <div id="restart_button" class="button" onclick="gameStart()">RESTART</div>
+      <div id="restart_msg" class="msg">PRESS RESTART</div>
+    </div>
 
 
 
-	<script>
-		let isJumping = false;
-		let isGameOver = false;
-		let score = 0;
-		let isKillerStart = false;
-
-		function fishDown() {
-			let fishLeft = Number($('#fish').css('left').replace('px', ''));
-			let killerRight = Number($('#killer').css('left').replace('px', '')) + 100;
-
-			if (isKillerStart && fishLeft <= killerRight) {
-				score += 200;
-				setScore(score);
-				$('#killer').stop().hide();
-				//킬러 없애고
-
-				killerInit();
-				isKillerStart = false;
-
-				//적 물고기 없애고
-				$('#fish').stop().hide();
-				fishInit();
-				setTimeout(fishStart, getRandomInt(500, 1000));
-
-			}
-		}
-
-		function gameStart() {
-			$("#gameover").hide();
-			$("#mario").show();
-			$("#container").show;
-			$("#mariodead").hide();
-			$("#wepon").hide();
-			isGameOver = false;
-
-			killer.css({ right: "-100px" });
-		}
+    <script>
+      let isJumping = false;
+      let isGameOver = false;
+      let score = 0;
+      let isKillerStart = false;
+      let isStart = false;
 
 
-		function marioDown() {
-			if (isGameOver) {
-				return;
-			}
+      //onload
+      $(function () {
+        $("body").keydown(function (e) {
+          if (e.key == " ") {
+            console.log();
+            jump();
+          } else if (e.key == "f") {
+            console.log();
+            killerStart();
+          }
+          e.preventDefault
+        });
 
-			let marioLeft = Number($('#mario').css('left').replace('px', ''));
-			let marioRight = marioLeft + 90;
+        $("#start").hide(); //시작 시 타이틀 숨겼다가
+        $("#start").fadeIn(1000); // 서서히 보여줌
+        //충돌 체크
+        setInterval(marioDown, 10);
 
-			let fishLeft = Number($('#fish').css('left').replace('px', ''));
+        //적 물고기 죽었나 체크
+        setInterval(fishDown, 10);
 
-			if (fishLeft <= marioRight && isJumping == false) {
-				console.log('die');
-				console.log($('#fish').css('left'));
-				// alert('Game over');
-				$('#fish').stop();
-				isGameOver = true;
-			}
+      });
 
-		}
+      function gameStart() {
+        $("#start").fadeOut(300)
+        //적 물고기 출발
+        fishStart();
+      }
 
-		function getRandomInt(min, max) {
-			min = Math.ceil(min);
-			max = Math.floor(max);
-			return Math.floor(Math.random() * (max - min)) + min; //최대값은 제외, 최솟값은 포함
-		}
+      function fishDown() {
+        let fishLeft = Number($("#fish").css("left").replace("px", ""));
+        let killerRight =
+          Number($("#killer").css("left").replace("px", "")) + 100;
 
-		function killerInit() {
-			$('#killer').css('left', '220px').stop().hide();
-		}
+        if (isKillerStart == true && fishLeft <= killerRight) {
+          score += 200;
+          setScore(score);
+          $("#killer").stop().hide();
+          //킬러 없애고
 
-		function killerStart() {
-			if (isKillerStart) {
-				retrun;
-			}
+          killerInit();
+          isKillerStart = false;
 
-			//발사
-			isKillerStart = true;
-			//미사일 발사
-			$('#killer').show().animate({ left: '105%' }, 1000, function () {
-				//원래 자리로 이동
-				$('#killer').css('left', '200px').hide();
-				isKillerStart = false;
-			});
-		}
+          //적 물고기 없애고
+          $("#fish").stop().hide();
+          fishInit();
+          setTimeout(fishStart, getRandomInt(500, 1000));
+        }
+      }
 
-		function fishStart() {
-			let speed = getRandomInt(1000, 2000);
-			let respawnTime = getRandomInt(1000, 2000);
-			$('#fish').animate({ left: '-150px' }, speed, function () {
-				if (isGameOver == false) {
-					score += 100;
-					setScore(score);
-				}
 
-				//왼쪽 끝까지 가면 초기 위치로 이동
-				fishInit();
+      function marioDown() {
+        if (isGameOver) {
+          return;
+        }
 
-				//1~2초 후에 다시 출발
-				setTimeout(fishStart, respawnTime);
-			});
-		}
+        let marioLeft = Number($("#mario").css("left").replace("px", ""));
+        let marioRight = marioLeft + 120;
 
-		function setScore(score) {
-			$('#score').text(`Score :${score}`);
-		}
+        let fishLeft = Number($("#fish").css("left").replace("px", ""));
 
-		function fishInit() {
-			//적 물고기 초기 위치로 이동
-			$('#fish').css('right', '-120px').css('left', '').show();
+        if (fishLeft <= marioRight && isJumping == false) {
+          console.log("die");
+          console.log($("#fish").css("left"));
+          $("#fish").stop();
+          isGameOver = true;
+          $('#gameover').css("display", "flex").fadeIn();
+        }
+      }
 
-		}
+      function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; //최대값은 제외, 최솟값은 포함
+      }
 
-		//연타 방지
-		function jump() {
-			if (isJumping) {
-				return;
-			}
+      function killerInit() {
+        $("#killer").css("left", "220px").stop().hide();
+      }
 
-			isJumping = true;
-			$('#mario').animate({ bottom: '+=200px' }, 'fast').animate({ bottom: '-=200px' }, 'slow', function () {
-				isJumping = false;
-			});
-		}
+      function killerStart() {
+        if (isKillerStart) {
+          retrun;
+        }
+        //발사
+        isKillerStart = true;
+        //미사일 발사
+        $("#killer")
+          .show()
+          .animate({ left: "105%" }, 1000, function () {
+            //원래 자리로 이동
+            $("#killer").css("left", "200px").hide();
+            isKillerStart = false;
+          });
+      }
 
-		//onload
-		$(function () {
-			$('body').keydown(function (event) {
-				switch (event.key) {
-					case 'd':
-						jump();
-						break;
-					case 'f':
-						killerStart();
-						break;
-				}
-			});
+      function fishStart() {
+        let speed = getRandomInt(1000, 2000);
+        let respawnTime = getRandomInt(1000, 2000);
+        $("#fish").animate({ left: "-150px" }, speed, function () {
+          if (isGameOver == false) {
+            score += 100;
+            setScore(score);
+          }
 
-			//적 물고기 출발
-			fishStart();
-			//충돌 체크
-			setInterval(marioDown, 10);
+          //왼쪽 끝까지 가면 초기 위치로 이동
+          fishInit();
 
-			//적 물고기 죽었나 체크
-			setInterval(fishDown, 10);
-		});
+          //1~2초 후에 다시 출발
+          setTimeout(fishStart, respawnTime);
+        });
+      }
 
-	</script>
+      function setScore(score) {
+        $("#score").text(`Score :${score}`);
+      }
+
+      function fishInit() {
+        //적 물고기 초기 위치로 이동
+        // console.log(fishInit);
+        $("#fish").css("right", "-120px").css("left", "").show();
+      }
+
+      //연타 방지
+      function jump() {
+        if (isJumping) {
+          return;
+        }
+        isJumping = true;
+        $("#mario")
+          .animate({ bottom: "+=200px" }, "fast")
+          .animate({ bottom: "-=200px" }, "slow", function () {
+            isJumping = false;
+          });
+      }
+
+
+    </script>
 </body>
 
 </html>

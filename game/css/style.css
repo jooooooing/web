@@ -1,122 +1,145 @@
 body {
-	overflow: hidden;
+  overflow: hidden;
 }
 
 .container {
-	display: flex;
-	margin: 0;
-	padding: 0;
-	border: 1px black solid;
-	position: relative;
-	height: 900px;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  border: 1px black solid;
+  position: relative;
+  height: 900px;
+}
+
+.msg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  flex-direction: column;
+  height: inherit;
+  width: 100%;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: "New Super Mario Font U", sans-serif;
+  color: white;
+  margin-top: 350px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  flex-direction: column;
+  height: inherit;
+  width: 100%;
+  margin-top: -100px;
+}
+
+#gameover {
+  display: none;
+}
+
+#gameover_img {
+  width: 1000px;
+  padding: 0px;
 }
 
 .button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	height: inherit;
+  font-family: "New Super Mario Font U", sans-serif;
+  font-size: xx-large;
+  background-color: tomato;
+  border: none;
+  color: white;
+  position: absolute;
+  padding: 6px;
+  bottom: 320px;
+  z-index: 5;
 }
 
-#startTitle {
-	position: relative;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	position: relative;
-	height: inherit;
+.text {
+  position: absolute;
+  font-family: "New Super Mario Font U", sans-serif;
+  font-size: 36px;
+  font-weight: bold;
 }
 
-#game_start_button {
-	font-family: 'New Super Mario Font U', sans-serif;
-	font-size: xx-large;
-	background-color: tomato;
-	border: none;
-	color: white;
-	position: relative;
+#credit {
+  top: 0px;
+  right: 20px;
 }
-
-#gameoverTitle {
-	border: none;
-	position: relative;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	height: inherit;
-}
-
 #score {
-	position: absolute;
-	left: 20px;
-	top: 0px;
-	font-family: 'New Super Mario Font U', sans-serif;
-	font-size: 36px;
-	font-weight: bold;
+  left: 20px;
+  top: 0px;
 }
 
 #mario {
-	width: 200px;
-	height: 200px;
-	position: absolute;
-	bottom: 150px;
-	left: 20px;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  bottom: 150px;
+  left: 20px;
 }
 
 #mario_main {
-	width: 200px;
-	height: 200px;
-	position: relative;
-	margin: 0 auto;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin: 0 auto;
 }
 
 #fish {
-	width: 120px;
-	height: 120px;
-	position: absolute;
-	bottom: 150px;
-	right: 50px;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  bottom: 150px;
+  right: 50px;
 }
 
 #killer {
-	transform: scaleX(-1);
-	/*좌우반전*/
-	width: 100px;
-	position: absolute;
-	left: 200px;
-	bottom: 170px;
-	display: none;
+  transform: scaleX(-1);
+  /*좌우반전*/
+  width: 100px;
+  position: absolute;
+  left: 200px;
+  bottom: 170px;
+  display: none;
 }
 
-#down {
-	display: none;
+#mario_die {
+  width: 140px;
+  height: 140px;
+  position: absolute;
+  bottom: 180px;
+  left: 50px;
+  display: none;
 }
 
 .background {
-	display: flex;
-	width: 100%;
-	height: 900px;
-	background-image: url('../assets/back_water.jpg');
-	/*상대경로*/
-	animation: slide 10s linear infinite;
-	background-position: 0 center;
+  display: flex;
+  width: 100%;
+  height: 900px;
+  background-image: url("../assets/back_water.jpg");
+  /*상대경로*/
+  animation: slide 10s linear infinite;
+  background-position: 0 center;
 }
 
 .background_main {
-	width: 100%;
-	height: 900px;
-	background-image: url('../assets/back_water.jpg');
-	/*상대경로*/
-	background-position: 0 center;
+  width: 100%;
+  height: 900px;
+  background-image: url("../assets/back_water.jpg");
+  /*상대경로*/
+  background-position: 0 center;
 }
 
 @keyframes slide {
-	0% {
-		background-position: 0 center;
-	}
+  0% {
+    background-position: 0 center;
+  }
 
-	100% {
-		background-position: -3360px center;
-	}
+  100% {
+    background-position: -3360px center;
+  }
 }
