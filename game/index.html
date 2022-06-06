@@ -14,11 +14,14 @@
     @import url("http://fonts.cdnfonts.com/css/new-super-mario-font-u");
   </style>
 
+
 </head>
 
 <body>
-  <!-- <audio src="https://vgmsite.com/soundtracks/super-mario-bros.-1-3-anthology/xfzlsvrv/1%2003%20Underwater.mp3"
-    controls> </audio> -->
+  <iframe src="assets/silence.mp3" allow="autoplay" id="bgm" style="display:none" frameborder="0"></iframe>
+  <audio id="bgm" autoplay>
+    <source src="assets/Underwater.mp3">
+  </audio>
   <div class="container">
     <div class="background"></div>
     <div id="score" class="text">Score : 0</div>
@@ -61,14 +64,14 @@
           if (e.key == " ") {
             console.log(e.key);
             jump();
-          } else if (e.keyCode == '39') { //오른쪽 방향키 keycode 39
+          } else if (e.keyCode == '39' && isGameOver == false) { //오른쪽 방향키 keycode 39
             console.log(e.key);
             killerStart();
-          } else if (e.keyCode == '13' && isGameOver == false && isStart == false) { //엔터 keycode 13
+          } else if (e.keyCode == '13' && isGameOver == false) { //엔터 keycode 13
             console.log(e.key);
             $("#start").fadeOut(300)
             gameStart();
-          } else if (e.keyCode == '13' && isGameOver == true && isStart == true) {
+          } else if (e.keyCode == '13' && isGameOver == true) {  //엔터 keycode 13
             $('#gameover').fadeOut(200);
             reset();
           }
@@ -86,10 +89,10 @@
       });
 
       function gameStart() {
-        //적 물고기 출발 
+        //게임 시작, 적 물고기 출발 
         isStart = true;
         fishStart();
-
+        isFishStart = true;
       }
 
       function reset() {
@@ -121,6 +124,7 @@
       function killerInit() {
         $("#killer").css("left", "90px").hide(); //킬러 초기위치
         isKillerStart = false;
+        console.log("killerInit" + isKillerStart);
       }
 
       function killerStart() {
@@ -128,9 +132,10 @@
           return;
         }
         //발사
-        isKillerStart = true;
+        console.log("KS" + isKillerStart);
         //미사일 발사
         $("#killer").show().animate({ left: "105%" }, 1500, killerInit); //killerInit는 되는데 killerInit()은 안됨
+        isKillerStart = true;
       }
 
       function fishDown() {
@@ -138,7 +143,7 @@
         let killerRight =
           Number($("#killer").css("left").replace("px", "")) + 100;
 
-        if (isKillerStart == true && fishLeft <= killerRight && isStart == true) {
+        if (isKillerStart == true && fishLeft <= killerRight && isStart == true && isFishStart == true) {
           score += 200;
           setScore(score);
           $("#killer").stop().hide();
@@ -158,35 +163,29 @@
           return;
         }
         //마리오와 물고기의 히트범위 구하기
-        let marioBottom = parseInt($("#mario").css("height")) + parseInt($("#mario").css("top"));
-        let marioLeft = parseInt($("#mario").css("left"));
+        let marioBottom = parseInt($("#mario").css("height")) - 120 + parseInt($("#mario").css("top")); //마리오 크기 조절
+        let marioLeft = parseInt($("#mario").css("left")) + 80;
         let marioRight = parseInt($("#mario").css("left")) + 120;
 
         let fishTop = parseInt($("#fish").css("top"));
         let fishLeft = parseInt($("#fish").css("left"));
-        let fishRight = parseInt($("#fish").css("right"));
+        let fishRight = parseInt($("#fish").css("left")) + 120;
 
-        if (marioBottom > fishTop && marioRight > fishLeft && marioLeft < fishRight) {
+        if (marioBottom > fishTop && marioRight >= fishLeft && marioLeft <= fishRight && isStart == true && isFishStart == true) {
           console.log("die");
-          console.log(marioBottom);
-          console.log(marioLeft);
-          console.log(marioRight);
-          console.log(fishTop);
-          console.log(fishLeft);
-          console.log(fishRight);
+          console.log(parseInt($("#mario").css("top")));
+          console.log("mB " + marioBottom);
+          console.log("fT " + fishTop);
+          console.log("mR " + marioRight);
+          console.log("fL " + fishLeft);
+          console.log("mL " + marioLeft);
+          console.log("fR " + fishRight);
 
           $("#fish").stop();
           isGameOver = true;
           $('#gameover').css("display", "flex").fadeIn();
         }
 
-        // if (fishLeft <= marioRight && isJumping == false) {
-        //   console.log("die");
-
-        //   $("#fish").stop();
-        //   isGameOver = true;
-        //   $('#gameover').css("display", "flex").fadeIn();
-        // }
       }
 
       function getRandomInt(min, max) {
@@ -196,14 +195,17 @@
       }
 
       function fishStart() {
+
         let speed = getRandomInt(1000, 3000);
         let respawnTime = getRandomInt(1000, 2000);
+        console.log("전" + isFishStart);
         $("#fish").animate({ left: "-120px" }, speed, function () {
           if (isGameOver == false && isStart == true && isJumping == true) {
             score += 100;
             setScore(score);
           }
-          isFishStart = true;
+          // isFishStart = true;
+          console.log("후" + isFishStart);
           //왼쪽 끝까지 가면 초기 위치로 이동
           fishInit();
 
@@ -218,7 +220,7 @@
 
       function fishInit() {
         //적 물고기 초기 위치로 이동
-        // console.log(fishInit);
+        console.log("fishInit");
         $("#fish").css("right", "-120px").css("left", "").show();
       }
 

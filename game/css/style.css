@@ -66,12 +66,14 @@ body {
 }
 
 #credit {
-  top: 0px;
+  top: 5px;
   right: 20px;
+  position: fixed;
 }
 #score {
   left: 20px;
-  top: 0px;
+  top: 5px;
+  position: fixed;
 }
 
 #mario {
