@@ -8,7 +8,7 @@
   <title>Document</title>
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
     crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="./css/style.css" />
   <!--css style시트 연결-->
   <style>
     @import url("http://fonts.cdnfonts.com/css/new-super-mario-font-u");
@@ -18,20 +18,20 @@
 </head>
 
 <body>
-  <iframe src="assets/silence.mp3" allow="autoplay" id="bgm" style="display:none" frameborder="0"></iframe>
+  <iframe src="./assets/silence.mp3" allow="autoplay" id="bgm" style="display:none" frameborder="0"></iframe>
   <audio id="bgm" autoplay>
-    <source src="assets/Underwater.mp3">
+    <source src="./assets/Underwater.mp3">
   </audio>
   <div class="container">
     <div class="background"></div>
     <div id="score" class="text">Score : 0</div>
     <div id="credit" class="text"> DEVELOPED BY JOOHYUN LEE</div>
-    <img id="mario" src="assets/marioSwim.gif" alt="mario" />`
-    <img id="fish" src="assets/fish.webp" alt="fish" />
-    <img id="killer" src="assets/killer.png" alt="killer" />
-    <img id="mario_die" src="assets/down.png" alt="mario_die" />
+    <img id="mario" src="./assets/marioSwim.gif" alt="mario" />`
+    <img id="fish" src="./assets/fish.webp" alt="fish" />
+    <img id="killer" src="./assets/killer.png" alt="killer" />
+    <img id="mario_die" src="./assets/down.png" alt="mario_die" />
     <div id="start" class="title">
-      <img src="assets/title.png" alt="start" />
+      <img src="./assets/title.png" alt="start" />
       <!--키 입력시 함수 시작-->
       <div id="tutorial" class="msg">
         <div>JUMP : 'SPACEBAR'<br>SHOT : 'RIGHT ARROW'</div>
@@ -39,7 +39,7 @@
       </div>
     </div>
     <div id="gameover" class="title">
-      <img id="gameover_img" src="assets/youdied.gif" alt="gameover_img" />
+      <img id="gameover_img" src="./assets/youdied.gif" alt="gameover_img" />
       <div id="restart_msg" class="msg">PRESS ENTER TO RESTART</div>
     </div>
 
