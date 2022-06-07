@@ -16,7 +16,7 @@
 			$('#demo').load('ajax_info.txt');
 			$.getJSON('people.json', function(json){
 				console.log(json);
-				$('#demo').html(JSON.stringify(json))
+				// $('#demo').html(JSON.stringify(json))
 				$('#demo').html(`${json.name}:${json.skill}`);
 			})
 		});
