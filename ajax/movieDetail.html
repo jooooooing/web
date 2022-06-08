@@ -102,8 +102,8 @@
 		$(function () {
 			const queryString = window.location.search; // url뒤 ?부터 가져옴
 			const parameters = new URLSearchParams(queryString);
-			const id = parameters.get('id');
-			console.log(id);
+			const index = parameters.get('index');
+			console.log(index);
 
 			fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=a64533e7ece6c72731da47c9c8bc691f&language=ko-KR&page=1')
 				.then(response => response.json())
@@ -111,12 +111,12 @@
 					let comment = $('.comments')
 					comment.append(`<div class="card">
 											<div class="container">
-													<h3 id = "title"><b>${json.results[id].title}</b></h3>
-													<img src="https://image.tmdb.org/t/p/w500${json.results[id].poster_path}">
-													<div id="openDay">개봉일 : ${json.results[id].release_date}</div>
-													<div id="voteAverage">√ ${json.results[id].vote_average}</div>
-													<div id="voteCount">☆ ${json.results[id].vote_count}</div>
-															<p id="contents">${json.results[id].overview}</p>
+													<h3 id = "title"><b>${json.results[index].title}</b></h3>
+													<img src="https://image.tmdb.org/t/p/w500${json.results[index].poster_path}">
+													<div id="openDay">개봉일 : ${json.results[index].release_date}</div>
+													<div id="voteAverage">√ ${json.results[index].vote_average}</div>
+													<div id="voteCount">☆ ${json.results[index].vote_count}</div>
+															<p id="contents">${json.results[index].overview}</p>
 											</div>
 										 </div>`)
 				})

@@ -19,7 +19,7 @@
 			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 			transition: 0.3s;
 			margin: 16px;
-			border-radius: 10px;
+			border-radius: 20px;
 			display: flex;
 			margin: 0 auto;
 		}
@@ -29,15 +29,17 @@
 		}
 
 		.container {
-			padding: 2px 16px;
-			display: block;
+			padding: 0px;
+			display: inline-block;
 			margin: 0px auto;
+			position: relative;
 		}
 
 		img {
 			border-radius: 10px;
 			width: 300px;
 			height: 430px;
+			position: relative;
 		}
 
 		#title {
@@ -53,7 +55,7 @@
 <body onload="loadData()">
 	<script>
 		function moveCommentsPage (index) {
-			window.location.href = `movieDetail.html?id=${index}`;
+			window.location.href = `movieDetail.html?index=${index}`;
 		};
 
 
@@ -64,9 +66,9 @@
 					for (var i = 0; i < jsonArray.results.length; i++) {
 						let $list = $('#list');
 						$list.append(`<div class ="card" onclick ="moveCommentsPage(${i})">
-							<span class ="container">
+							<div class ="container">
 								<img src="https://image.tmdb.org/t/p/w500${jsonArray.results[i].poster_path}">
-								<h3 id = "title">${jsonArray.results[i].title}</h3></span></div>`);
+								<h3 id = "title">${jsonArray.results[i].title}</h3></div></div>`);
 					}
 					console.log(jsonArray);
 				});
