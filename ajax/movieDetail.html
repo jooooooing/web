@@ -30,6 +30,7 @@
 		img {
 			display: block;
 			margin: 0px;
+			width: 200px;
 		}
 
 		div #openDay {
@@ -72,12 +73,20 @@
 			box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 		}
 
-		p #contents {
+		#contents {
 			display: inline-block;
 			position: relative;
 			overflow: visible;
 			font-size: large;
 			padding: 3px;
+			margin: 0 auto;
+		}
+
+		#title {
+			text-align: left; 
+			font-size: 30px; 
+			margin : 10px; 
+			color: blue
 		}
 	</style>
 	<script>
@@ -96,12 +105,12 @@
 					let comment = $('.comments')
 					comment.append(`<div class="card">
 											<div class="container">
-													<h3 style="text-align: left; font-size: 30px; margin : 10px; color: blue"><b>${json.results[id].title}</b></h3>
-													<img src="https://image.tmdb.org/t/p/w500${json.results[id].poster_path}" style="width: 200px;">
+													<h3 id = "title"><b>${json.results[id].title}</b></h3>
+													<img src="https://image.tmdb.org/t/p/w500${json.results[id].poster_path}">
 													<div id="openDay">개봉일 : ${json.results[id].release_date}</div>
 													<div id="voteAverage">√ ${json.results[id].vote_average}</div>
 													<div id="voteCount">☆ ${json.results[id].vote_count}</div>
-															<p id="contents" style="margin: 0 auto">${json.results[id].overview}</p>
+															<p id="contents">${json.results[id].overview}</p>
 											</div>
 										 </div>`)
 				})
